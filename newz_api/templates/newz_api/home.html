@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <title>Newz</title>
+
+
+</head>
+<body>
+
+    <div class="container-fluid bg-light">
+        <div class="row justify-content-center py-5">
+            <div class="col-md-6 text-center">
+                <h1 class="display-4">Newz</h1>
+                <p class="lead">Encontre as últimas notícias de diversas fontes em um só lugar!</p>
+            </div>
+        </div>
+
+        <div class="col-md-6 mx-auto mb-4">
+            <form action="" method="GET" class="d-flex justify-content-center">
+                <div class="form-group mb-0 ml-2">
+                    <input type="text" name="fonte" class="form-control" placeholder="Busque por fonte...">
+                </div>
+                <button type="submit" class="btn btn-primary mx-2">Buscar</button>
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+
+                <b>Topicos</b>
+                <ul class="list-group">
+                    <li class="list-group-item"><a class="btn btn-primary" href="{% url 'home' %}?category=technology">Tecnologia</a></li>
+                    <li class="list-group-item"><a class="btn btn-primary" href="{% url 'home' %}?category=health">Saúde</a></li>
+                    <li class="list-group-item"><a class="btn btn-primary" href="{% url 'home' %}?category=Entertainment">Entretenimento</a></li>
+                    <li class="list-group-item"><a class="btn btn-primary" href="{% url 'home' %}?category=Sports">Esporte</a></li>
+                    <li class="list-group-item"><a class="btn btn-primary" href="{% url 'home' %}?category=Science">Ciência</a></li>
+                    <li class="list-group-item"><a class="btn btn-primary" href="{% url 'home' %}?category=Business">Negócios</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    {% for artigo in artigos %}
+                        {% if artigo.urlToImage and artigo.author and artigo.title and artigo.description and artigo.url and artigo.publishedAt %}
+
+                            <div class="col-md-6 mb-4">
+                                <div class="card mb-3">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-4">
+                                            <img src="{{artigo.urlToImage}}" class="card-img" alt="foto">
+                                            <p class="card-text"><small class="text-muted">Por: {{artigo.author}}</small></p>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{artigo.title}}</h5>
+                                                <p class="card-text">{{artigo.description}}</p>
+                                                <p class="card-text"><small class="text-muted">Publicado em: {{artigo.publishedAt}}</small></p>
+                                                <a href="{{artigo.url}}" target="_blank" class="btn btn-primary">Noticia Completa</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>                
+</html>
